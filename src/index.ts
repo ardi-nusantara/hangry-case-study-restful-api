@@ -1,13 +1,12 @@
-import express, { Request, Response } from 'express';
-import bodyParser from 'body-parser';
-import logs from './middleware/logs';
+import express, { Request, Response, NextFunction } from 'express';
+import logs from './config/logs';
 
 const NAMESPACE = 'localhost';
 const app = express();
 const port = 5000;
 
 /** Log the request */
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
     /** Log the req */
     logs.info(NAMESPACE, `METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
@@ -15,11 +14,11 @@ app.use((req, res, next) => {
         /** Log the res */
         logs.info(NAMESPACE, `METHOD: [${req.method}] - URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`);
     })
-    
+
     next();
 });
 
-app.use(bodyParser.json())
+app.use(express.json())
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
