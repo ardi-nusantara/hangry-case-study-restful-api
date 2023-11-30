@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import logs from './config/logs';
 import locationRoutes from './routes/location'
 import menuRoutes from './routes/menu'
+import cartRoutes from './routes/cart'
 
 const NAMESPACE = 'localhost';
 const app = express();
@@ -26,6 +27,7 @@ app.use(express.json())
 /** App Routes */
 app.use('/location', locationRoutes)
 app.use('/menu', menuRoutes)
+app.use('/cart', cartRoutes)
 
 
 app.get('/', (req: Request, res: Response) => {

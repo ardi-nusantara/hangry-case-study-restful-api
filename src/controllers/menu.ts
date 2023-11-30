@@ -17,6 +17,24 @@ const getAllMenus = async (req: Request, res: Response) => {
     }
 }
 
+const getMenuById = async (req: Request, res: Response) => {
+    const menuId: number = parseInt(req.params.menuId, 10);
+    try {
+        const [data] = await MenuModel.getMenuById(menuId)
+    
+        res.json({
+            message: "GET All Menus success",
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server Error",
+            serverMessage: error
+        })
+    }
+}
+
 export default {
-    getAllMenus
+    getAllMenus,
+    getMenuById,
 }
