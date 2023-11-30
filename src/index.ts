@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import logs from './config/logs';
 import locationRoutes from './routes/location'
+import menuRoutes from './routes/menu'
 
 const NAMESPACE = 'localhost';
 const app = express();
@@ -19,8 +20,13 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
+/** Middleware */
 app.use(express.json())
+
+/** App Routes */
 app.use('/location', locationRoutes)
+app.use('/menu', menuRoutes)
+
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
