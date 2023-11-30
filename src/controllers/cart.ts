@@ -30,7 +30,7 @@ const addNewCart = async (req: Request, res: Response) => {
     try {        
         await CartModel.addNewCart(body);
         res.status(201).json({
-            message: 'CREATE new user success',
+            message: 'CREATE new cart success',
             data: body
         })
     } catch (error) {
