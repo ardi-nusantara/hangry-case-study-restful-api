@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import logs from './config/logs';
+import locationRoutes from './routes/location'
 
 const NAMESPACE = 'localhost';
 const app = express();
@@ -19,6 +20,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use(express.json())
+app.use('/location', locationRoutes)
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
